@@ -35,9 +35,9 @@ function App() {
 
       <div className="container">
         <div className="cards">
-          <Card title="Design" desc="UI moderna e pulita" />
-          <Card title="React" desc="Componenti riutilizzabili" />
-          <Card title="SCSS" desc="Stili organizzati e modulari" />
+          {posts.map((post, index) => (
+            <Card key={index} title={post.title} desc={post.text} />
+          ))}
         </div>
 
         <Sidebar />
