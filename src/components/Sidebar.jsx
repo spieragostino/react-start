@@ -1,11 +1,13 @@
-function Sidebar() {
+function Sidebar({ menu }) {
   return (
     <aside className="sidebar">
       <h3>Menu</h3>
+
+      <h3>Links</h3>
       <ul>
-        <li>Home</li>
-        <li>Servizi</li>
-        <li>Contatti</li>
+        {menu.map((item, index) => (
+          <li key={index}>{item.name}</li>
+        ))}
       </ul>
     </aside>
   );
