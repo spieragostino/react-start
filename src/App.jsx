@@ -1,11 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-// import Card from "./components/Card";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
+
 import { useEffect, useState } from "react";
+
 import Home from "./pages/Home";
 import NoMatch from "./pages/NoMatch";
 import About from "./pages/About";
@@ -17,20 +19,29 @@ function App() {
     age: 30,
     city: "Pescara",
   });
-  //
+
   useEffect(() => {
     console.log("CIAO", user);
   }, [user]);
+
   const handleChangeCity = (city) => {
-    // setUser((prevState) => ({ ...prevState, city: city }));
     setUser({ ...user, city: city });
   };
+
+  // MENU DINAMICO
   const menu = [
-    { name: "Home", link: "#" },
-    { name: "Servizi", link: "#" },
-    { name: "Contatti", link: "#" },
+    {
+      id: 1,
+      page: "Home",
+      slug: "/",
+    },
+    {
+      id: 2,
+      page: "About",
+      slug: "/about",
+    },
   ];
-  const textLogo = "Logo";
+
   const posts = [
     {
       id: 1,
@@ -48,34 +59,29 @@ function App() {
       text: "Testo di esempio per la terza card...",
     },
   ];
+
   const aboutPage = {
     title: "About",
-    content:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis distinctio corporis laborum quibusdam a, esse deserunt libero quaerat animi eum eos sed dicta neque magni? Nesciunt nam optio fuga sunt?",
+    content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
   };
-  console.log(posts, textLogo, menu);
-  //usare map per iterare i post e renderizzare una card per ogni post
+
   return (
     <div className="app">
-      <Navbar />
+      <Navbar menu={menu} />
 
       <Hero />
 
       <div className="container">
-        {/* <div className="cards">
-          {posts.map((post) => (
-            <Card key={post.id} title={post?.title} desc={post.text} />
-          ))}
-        </div> */}
-        {/* <Home posts={posts} /> */}
         <Routes>
           <Route path="/" element={<Home posts={posts} />} />
+
           <Route
             path="/about"
             element={
-              <About title={aboutPage?.title} content={aboutPage?.content} />
+              <About title={aboutPage.title} content={aboutPage.content} />
             }
           />
+
           <Route path="*" element={<NoMatch />} />
         </Routes>
 

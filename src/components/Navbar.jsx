@@ -1,22 +1,21 @@
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ menu }) {
   return (
     <nav className="navbar">
-      <div className="logo">ReactStart</div>
-
-      <ul className="nav-links">
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/about">About</NavLink>
-        </li>
-        <li>Services</li>
-        <li>Contact</li>
+      <ul>
+        {menu.map((item) => (
+          <li key={item.id}>
+            <NavLink
+              to={item.slug}
+              end={item.slug === "/"}
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              {item.page}
+            </NavLink>
+          </li>
+        ))}
       </ul>
-
-      <button className="btn">Login</button>
     </nav>
   );
 }
